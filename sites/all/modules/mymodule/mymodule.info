@@ -1,0 +1,5 @@
+name = Ajax Module
+description = Display articles with Ajax.
+package = Custom Modulules
+core = 7.x
+files[] = mymodule.module
