@@ -1,0 +1,6 @@
+name = DNA
+description = Outputs the other half of a users DNA helix
+package = Custom Modulules
+core = 7.x
+dependencies[] = simpletest
+files[] = dna.test

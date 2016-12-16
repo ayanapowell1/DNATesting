@@ -1,0 +1,56 @@
+<?php
+function dna_menu() {
+    // set up
+    $items['dna'] = array(
+        'title' => 'DNA',
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('dna_form'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+
+    $items['dna_success_page'] = array(
+        'title' => 'success',
+        'page callback' => 'dna_success',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+
+// Build form
+function dna_form() {
+    $form['dna_input'] = array(
+        '#title' => 'Input the first half of your DNA helix!',
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#element_validate' => array('element_validate_input'),
+    );
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Go!',
+    );
+    return $form;
+}
+
+//Validate Input
+function element_validate_input($element) {
+    $valid_inputs = array('a', 't', 'c', 'g');
+    $inputted_array = str_split(strtolower($element['value']));
+    foreach($inputted_array as $input) {
+        if(in_array($input, $valid_inputs) == false) {
+            form_error($element, t("That's not a valid input, please enter only the following: A, T, C, G"));
+        }
+    }
+}
+
+
+// Run logic using user input
+function dna_form_submit($form, &$form_state) {
+
+}
+
+// Take user to success page and display returned value
+function dna_succss() {
+    
+}

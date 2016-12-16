@@ -1,0 +1,37 @@
+
+<?php
+// ===== FUNCTIONAL TEST ===== //
+class DnaTests extends DrupalWebTestCase {
+    // Metadata about test case
+    public static function getInfo() {
+        return array(
+            'name' => 'DNA Functional Test',
+            'description' => 'Tests for the DNA module',
+            'group' => 'DNA',
+        );
+    }
+
+    // Perform set up tasks for test case, in this case, enable DNA module
+    public function setUp() {
+        parent::setUp(array('dna'));
+    }
+
+    // Test DNA page and its content(passing)
+    public function testDna() {
+        $this->drupalGet('dna');
+        $this->assertText('Input the first half of your DNA helix!', 'This text is present');
+    }
+}
+
+// ===== UNIT TEST ===== //
+class DnaTests extends DrupalUnitTestCase {
+    // Metadata about test case
+    public static function getInfo() {
+        return array(
+            'name' => 'DNA Unit Test',
+            'description' => 'Tests for the DNA module',
+            'group' => 'DNA',
+        );
+    }
+
+}
