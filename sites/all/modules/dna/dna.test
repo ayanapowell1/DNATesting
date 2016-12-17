@@ -52,6 +52,12 @@ class DnaTestCase extends DrupalUnitTestCase {
         $result = array_map('dnaGenerator', str_split($input));
         $expected_output = 'G';
         $this->assertTrue($result, $expected_output, $message);
+
+        $message = "An input of 'a' return 'T'";
+        $input = 'g';
+        $result = array_map('dnaGenerator', str_split($input));
+        $expected_output = 'C';
+        $this->assertTrue($result, $expected_output, $message);
     }
 
 }
