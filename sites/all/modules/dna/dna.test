@@ -24,7 +24,7 @@ class DnaTests extends DrupalWebTestCase {
 }
 
 // ===== UNIT TEST ===== //
-class DnaTests extends DrupalUnitTestCase {
+class DnaTestCase extends DrupalUnitTestCase {
     // Metadata about test case
     public static function getInfo() {
         return array(
@@ -32,6 +32,14 @@ class DnaTests extends DrupalUnitTestCase {
             'description' => 'Tests for the DNA module',
             'group' => 'DNA',
         );
+    }
+
+    function testSecondHelix() {
+        $message = "An input of 'a' return 'T'";
+        $input = 'a';
+        $result = array_map('dnaGenerator', str_split($input));
+        $expected_output = 'T';
+        $this->assertTrue($result, $expected_output, $message);
     }
 
 }

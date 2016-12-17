@@ -33,13 +33,13 @@ function dna_form() {
     return $form;
 }
 
-//Validate Input
+// Validate Input
 function element_validate_input($element) {
-    $valid_inputs = array('a', 't', 'c', 'g');
-    $inputted_array = str_split(strtolower($element['value']));
+    $valid_inputs = array('a', 't', 'c', 'g', 'A', 'T', 'C', 'G');
+    $inputted_array = str_split($element['#value']);
     foreach($inputted_array as $input) {
         if(in_array($input, $valid_inputs) == false) {
-            form_error($element, t("That's not a valid input, please enter only the following: A, T, C, G"));
+            form_error($element, t("That's not a valid input, please enter only the following: A, T, C, G, a, t, c, g"));
         }
     }
 }
@@ -47,10 +47,28 @@ function element_validate_input($element) {
 
 // Run logic using user input
 function dna_form_submit($form, &$form_state) {
+    $_SESSION['helix1'] = strtoupper($form_state['values']['dna_input']);
+    $_SESSION['helix2'] = array_map('dnaGenerator', str_split($_SESSION['helix1']));
+    $form_state['redirect'] = 'dna_success_page';
+}
 
+// Create a new array using conditionals
+function dnaGenerator($input) {
+    if($input === 'A') {
+		$input = 'T';
+	} elseif($input === 'T') {
+		$input = 'A';
+	} elseif($input === 'C') {
+		$input = 'G';
+	} elseif($input === 'G') {
+		$input = 'C';
+	}
+	return $input;
 }
 
 // Take user to success page and display returned value
-function dna_succss() {
-    
+function dna_success() {
+    $helix1 = $_SESSION['helix1'];
+    $helix2 = implode($_SESSION['helix2']);
+    return 'Your first strand is:  <b>' . $helix1 . '</b><br><br> Your second strand is:  <b>' . $helix2 . '</b>';
 }
